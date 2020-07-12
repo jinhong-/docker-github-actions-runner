@@ -41,5 +41,10 @@ RUN apt-get update && \
   && apt-get install -y docker-ce docker-ce-cli containerd.io --no-install-recommends \
   && curl -sL "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose \
+  #k6 installation
+  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61 \
+  && echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list \
+  && apt-get update \
+  && apt-get install -y k6 \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/*
