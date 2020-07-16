@@ -24,6 +24,7 @@ RUN apt-get update && \
     libcurl4-openssl-dev \
     inetutils-ping \
     jq \
+    iproute2 \
   && curl -sL https://deb.nodesource.com/setup_12.x | bash \
   && apt-get install -y nodejs \
   && c_rehash \
