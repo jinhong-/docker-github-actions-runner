@@ -42,10 +42,17 @@ RUN apt-get update && \
   && apt-get install -y docker-ce docker-ce-cli containerd.io --no-install-recommends \
   && curl -sL "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose \
-  #k6 installation
+  #k6 installation START
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61 \
   && echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list \
   && apt-get update \
   && apt-get install -y k6 \
+  #k6 installation END
+  #pact installation START
+  && curl -LO https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.87.6/pact-1.87.6-linux-x86_64.tar.gz \
+  && tar xzf pact-1.87.6-linux-x86_64.tar.gz -C /opt/ \
+  #pact installation END
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/*
+
+ENV PATH="/opt/pact/bin:${PATH}"
